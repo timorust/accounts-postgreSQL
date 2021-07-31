@@ -10,7 +10,7 @@ function getAccountById(id) {
 }
 
 function addAccount(acc) {
-  return connectedKnex('accounts').insert(acc);
+  return connectedKnex('accounts').insert(acc).returning('id');
 }
 
 function updateAccount(acc, id) {

@@ -33,7 +33,7 @@ app.post('/accounts', async (req, res) => {
         const result = await acc_repo.addAccount(acc)
         res.status(201).json({
             res: 'success',
-            url: `localhost:8080/accounts/${acc}`,
+            url: `localhost:8080/accounts/${result}`,
             result
         })
     }
@@ -86,70 +86,3 @@ app.delete('/accounts/:acc_id', async(req, res) => {
 
 
 app.listen(port, () => console.log(`Listening to port ${port}`))
-
-
-
-
-
-
-
-
-// app.post('/books', async (req, res) => {
-//     try
-//     {
-//         bks = req.body
-//         console.log(bks)
-//         const result = await bks_repo.addBook(bks)
-//         res.status(201).json({
-//             res: 'success',
-//             url: `localhost:8080/books/${bks.ID}`,
-//             result
-//         })
-//     }
-//     catch(e) {
-//         res.status(400).send({
-//             status: 'fail',
-//             message: e.message
-//         })
-//     }
-// })
-
-// app.put('/books/:bks_id', async(req, res) => {
-//     try
-//     {
-//         const bks_id = req.params.bks_id
-//         bks = req.body
-//         const result = await bks_repo.updateBook(bks, bks_id)
-//         res.status(200).json({
-//             res: 'success',
-//             url: `localhost:8080/books/${bks.ID}`,
-//             result
-//         })
-//     }
-//     catch(e) {
-//         res.status(400).send({
-//             status: 'fail',
-//             message: e.message
-//         })
-//     }
-// });
-
-// app.delete('/books/:bks_id', async(req, res) => {
-//     try
-//     {
-//         const bks_id = req.params.bks_id
-//         const result = await bks_repo.deleteBook(bks_id)
-//         res.status(200).json({
-//             res: 'success',
-//             url: `localhost:8080/books/${bks_id}`,
-//             result
-//         })
-//     }
-//     catch(e) {
-//         res.status(400).send({
-//             status: 'fail',
-//             message: e.message
-//         })
-//     }
-// });
-
