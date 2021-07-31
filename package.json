@@ -1,0 +1,17 @@
+{
+  "name": "accounts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon express.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "knex": "^0.95.8",
+    "pg": "^8.7.1",
+    "sqlite3": "^5.0.2",
+    "winston": "^3.3.3"
+  }
+}
