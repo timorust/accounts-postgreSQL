@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
+
 const acc_repo = require('./account_repo')
+const raw_repo = require('./raw_repo')
 
 const port = 8080;
 const app = express();
@@ -14,7 +16,6 @@ app.use(express.json())
 app.use(express.urlencoded({
   extended: true
 }))
-
 
 
 const Pool = require('pg').Pool
@@ -39,10 +40,37 @@ const logger = createLogger({
     ]
 })
 
-
 logger.log({
   level: 'info',
   message: '*********** starting app ***********'
+});
+
+
+// ************** Knex Join ***********
+app.get('/cus_order', async(req, res) => {
+   const result = await raw_repo.getRawResult(`select * from customer c right
+           join orders o on c.id = o.costumer_id;`);
+    res.status(200).json(result.rows);
+
+});
+
+
+    
+
+// ************** Pool Join ***********
+app.get('/pg_join', async(req, res) => {
+  pool.query(`select * from customer c right
+               join orders o on c.id = o.costumer_id;`, (error, results) => {
+          if (error) {
+           logger.log({
+               level: 'error',
+               message: `Error: ${error}`
+           });
+           res.status(500).json({'error': error.toString()})
+        }
+        else 
+        res.status(200).json(results.rows)
+    })
 });
 
 
